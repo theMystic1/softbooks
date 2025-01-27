@@ -1,0 +1,1 @@
+ALTER TABLE "users_table" ALTER COLUMN "borrow_status" DROP DEFAULT;
