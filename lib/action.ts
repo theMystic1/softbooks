@@ -5,7 +5,7 @@ import { usersTable } from "@/database/schema";
 import { AuthCredentials } from "@/tsconfig/types";
 import { hash } from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "@/lib/ratelimit";
 import { redirect } from "next/navigation";
@@ -109,3 +109,8 @@ export const signup = async (params: AuthCredentials) => {
     };
   }
 };
+
+export async function signOutUser() {
+  await signOut();
+  // redirect("/login");
+}

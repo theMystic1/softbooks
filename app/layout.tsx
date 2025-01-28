@@ -33,8 +33,6 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: LayoutChildren) {
   const session = await auth();
 
-  if (!session) redirect("/login");
-
   after(async () => {
     if (!session?.user?.id) {
       return;
