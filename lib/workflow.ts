@@ -12,7 +12,7 @@ export const sendEmail = async ({ email, subject, message }: SendMail) => {
       provider: resend({ token: Config.resendToken }),
     },
     body: {
-      from: "D mystic <noreply.chukwujekwu.xyz>",
+      from: "D mystic <contact@chukwujekwu.xyz>",
       to: email,
       subject,
       html: message,
