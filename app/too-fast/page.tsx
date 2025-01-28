@@ -3,7 +3,7 @@ function page() {
     <main className="min-h-screen flex flex-col justify-center gap-4 items-center">
       <h1 className="font-bebas-neue font-bold capitalize  text-5xl">
         {" "}
-        hey hey hey, ☹️ Slow down mate, Hehe 🚦
+        hey buddy, ☹️ Slow down mate, Hehe 🚦
       </h1>
 
       <p className="text-base text-center">
