@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { db } from "@/database/drizzle";
 import { usersTable } from "@/database/schema";
 import { sendEmail } from "@/lib/workflow";
@@ -11,7 +10,6 @@ type InitialData = {
 };
 
 type UserState = "active" | "non-active";
-const session = await auth();
 
 const ONE_DAY_IN_MILISEC = 24 * 60 * 60 * 1000;
 const THREE_DAY_IN_MILISEC = 3 * ONE_DAY_IN_MILISEC;
