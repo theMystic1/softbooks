@@ -9,6 +9,8 @@ import { signIn } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "@/lib/ratelimit";
 import { redirect } from "next/navigation";
+import { workflow } from "./workflow";
+import { Config } from "@/tsconfig/envconfig";
 
 export const signInWithCredentials = async (
   credentials: Pick<AuthCredentials, "email" | "password">
@@ -85,10 +87,13 @@ export const signup = async (params: AuthCredentials) => {
       profileImage: profileImage || "",
     });
 
-    // toast({
-    //   title: "User Created Successfully",
-    //   description: "You have successfully created an account",
-    // });
+    await workflow.trigger({
+      url: `${Config.prodApiEndPoint}/api/workflow/onboarding`,
+      body: {
+        email,
+        name,
+      },
+    });
 
     await signInWithCredentials({ email, password });
 

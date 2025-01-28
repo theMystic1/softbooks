@@ -6,6 +6,11 @@ import Body from "../components/ui/client-body";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { after } from "next/server";
+import { db } from "@/database/drizzle";
+import { usersTable } from "@/database/schema";
+import { eq } from "drizzle-orm";
 
 // IBM Plex Sans configuration
 const ibmPlexSans = IBM_Plex_Sans({
@@ -27,6 +32,30 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: LayoutChildren) {
   const session = await auth();
+
+  if (!session) redirect("/login");
+
+  after(async () => {
+    if (!session?.user?.id) {
+      return;
+    }
+
+    const loginDate = new Date().toISOString().slice(0, 10);
+
+    // Check if the lastActivityDate in the database matches the current login date.
+    const curUser = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable?.id, session?.user?.id))
+      .limit(1);
+    if (curUser[0]?.lastActivityDate === loginDate) return;
+
+    // Update the lastActivityDate in the database for the current user when they log in again.
+    await db
+      .update(usersTable)
+      .set({ lastActivityDate: loginDate })
+      .where(eq(usersTable?.id, session?.user?.id));
+  });
 
   return (
     <html

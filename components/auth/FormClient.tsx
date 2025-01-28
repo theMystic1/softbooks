@@ -10,7 +10,7 @@ import { Config } from "@/tsconfig/envconfig";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { toast } from "@/hooks/use-toast";
-import { signInWithCredentials, signup } from "@/app/lib/action";
+import { signInWithCredentials, signup } from "@/lib/action";
 
 function FormClient() {
   const pathname = usePathname();

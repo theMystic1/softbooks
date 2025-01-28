@@ -1,5 +1,6 @@
 export const Config = {
   apiEndPoint: process.env.NEXT_PUBLIC_BASE_URL!,
+  prodApiEndPoint: process.env.NEXT_PUBLIC_PROD_API_ENDPOINT!,
   IkImage: {
     publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY!,
     privateKey: process.env.PRIVATE_KEY!,
@@ -12,4 +13,6 @@ export const Config = {
     qstashUrl: process.env.QSTASH_URL!,
     qstashToken: process.env.QSTASH_TOKEN!,
   },
+
+  resendToken: process.env.RESEND_TOKEN!,
 };

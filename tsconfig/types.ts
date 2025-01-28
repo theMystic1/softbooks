@@ -35,3 +35,9 @@ export type AuthCredentials = {
   idNumber: number;
   profileImage?: string;
 };
+
+export type SendMail = {
+  email: string;
+  subject: string;
+  message: string;
+};
